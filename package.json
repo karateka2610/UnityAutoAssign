@@ -1,0 +1,23 @@
+{
+  "name": "com.unity.autoassign",
+  "version": "1.1.0",
+  "displayName": "Unity Auto Assign",
+  "description": "Automatically assigns component references using reflection and custom attributes. Supports search in children, parents, scene, auto-creation, and tag-based search. Eliminates manual component assignment in the Inspector.",
+  "unity": "2021.3",
+  "keywords": [
+    "unity",
+    "auto-assign",
+    "attributes",
+    "editor",
+    "components",
+    "reflection",
+    "productivity",
+    "workflow",
+    "automation"
+  ],
+  "author": {
+    "name": "Unity Auto Assign",
+    "email": "support@autoassign.dev"
+  },
+  "dependencies": {}
+}
