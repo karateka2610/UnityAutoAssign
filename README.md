@@ -22,7 +22,7 @@ Automatically assigns component references in Unity using custom attributes and 
 1. Open Unity Package Manager (Window > Package Manager)
 2. Click "+" button
 3. Select "Add package from git URL"
-4. Enter: `https://github.com/YOUR_USERNAME/UnityAutoAssign.git`
+4. Enter: `https://github.com/karateka2610/UnityAutoAssign.git`
 
 ### Manual Installation
 
