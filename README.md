@@ -250,6 +250,7 @@ public class CompletePlayer : MonoBehaviour
         rb.velocity = input.normalized * speed;
     }
 }
+```
 
 ## Editor Integration
 
