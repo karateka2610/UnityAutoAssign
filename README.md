@@ -110,7 +110,7 @@ MIT License - See [LICENSE.md](./LICENSE.md)
 
 ## Support
 
-- Report bugs via [GitHub Issues](https://github.com/YOUR_USERNAME/UnityAutoAssign/issues)
+- Report bugs via [GitHub Issues](https://github.com/karateka2610/UnityAutoAssign/issues)
 - Feature requests welcome
 - Pull requests accepted
 
