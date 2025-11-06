@@ -88,10 +88,23 @@ public class AutoAssignerEditor : Editor
     private void OnEnable()
     {
         // Auto-asignar cuando se añade el componente o se resetea
-        if (target is MonoBehaviour mb && ShouldAutoAssign(mb))
+        if (target is MonoBehaviour mb)
         {
-            AutoAssigner.AssignComponent(mb);
-            EditorUtility.SetDirty(target);
+            bool shouldProcess = ShouldAutoAssign(mb) || HasAutoSetup(mb) || HasConfigureComponent(mb);
+            
+            if (shouldProcess)
+            {
+                // 1. Aplicar AutoSetup primero (tags, layers, etc)
+                AutoSetup.ApplySetup(mb);
+                
+                // 2. Luego aplicar AutoAssign (componentes)
+                AutoAssigner.AssignComponent(mb);
+                
+                // 3. Finalmente configurar componentes (propiedades de componentes)
+                ComponentConfigurator.ConfigureComponents(mb);
+                
+                EditorUtility.SetDirty(target);
+            }
         }
     }
 
@@ -106,6 +119,34 @@ public class AutoAssignerEditor : Editor
         foreach (var field in fields)
         {
             if (field.GetCustomAttribute<AutoAssignAttribute>() != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Verifica si el MonoBehaviour tiene el atributo [AutoSetup]
+    /// </summary>
+    private bool HasAutoSetup(MonoBehaviour mb)
+    {
+        var type = mb.GetType();
+        return type.GetCustomAttribute<AutoSetupAttribute>() != null;
+    }
+
+    /// <summary>
+    /// Verifica si el MonoBehaviour tiene campos con [ConfigureComponent]
+    /// </summary>
+    private bool HasConfigureComponent(MonoBehaviour mb)
+    {
+        var type = mb.GetType();
+        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+        foreach (var field in fields)
+        {
+            if (field.GetCustomAttribute<ConfigureComponentAttribute>() != null)
             {
                 return true;
             }
